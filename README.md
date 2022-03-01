@@ -1,4 +1,4 @@
-# r3f-audio-visualizer
+# Fork of r3f-audio-visualizer for custom needs
 
 An interactive audio visualizer built with react and THREE.js.
 
