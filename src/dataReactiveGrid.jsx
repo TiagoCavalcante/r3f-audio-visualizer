@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import AnaylzerLivestream from "./analyzerLivestream";
 import { Lut } from "three/examples/jsm/math/Lut.js";
-import { Matrix4 } from "three";
+import { Matrix4 } from "three/src/math/Matrix4";
 import PropTypes from "prop-types";
 import { useFrame } from "@react-three/fiber";
 

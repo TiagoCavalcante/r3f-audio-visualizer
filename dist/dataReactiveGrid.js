@@ -15,7 +15,7 @@ var _analyzerLivestream = _interopRequireDefault(require("./analyzerLivestream")
 
 var _Lut = require("three/examples/jsm/math/Lut.js");
 
-var _three = require("three");
+var _Matrix = require("three/src/math/Matrix4");
 
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
@@ -47,7 +47,7 @@ function DataReactiveGrid(_ref) {
   } = _ref;
   const mesh = (0, _react.useRef)();
   const data = (0, _react.useMemo)(() => new Array(121), []);
-  const matrix = (0, _react.useMemo)(() => new _three.Matrix4(), []);
+  const matrix = (0, _react.useMemo)(() => new _Matrix.Matrix4(), []);
   const lut = (0, _react.useMemo)(() => new _Lut.Lut("cooltowarm"), []);
   (0, _react.useEffect)(() => {
     if (!audioRef.current || !data) return;
