@@ -1,14 +1,16 @@
 import AudioMotionAnalyzer from "audiomotion-analyzer";
 
-function AnaylzerLivestream({ audioRef, setData }) {
+function AnaylzerLivestream({ audioRef, data }) {
   return new AudioMotionAnalyzer(null, {
     source: audioRef.current,
     mode: 2,
-    useCanvas: false, // don't use the canvas
+    useCanvas: false,
     volume: 1,
-    onCanvasDraw: ({ getBars }) => setData(
-      getBars().map(({ value }) => value[0])
-    )
+    onCanvasDraw: (instance) => {
+      instance
+        .getBars()
+        .forEach(({ value }, index) => data[index] = value[0]);
+    }
   });
 }
 

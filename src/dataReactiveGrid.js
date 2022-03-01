@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import AnaylzerLivestream from "./analyzerLivestream";
 import { Lut } from "three/examples/jsm/math/Lut.js";
 import { Matrix4 } from "three";
 import PropTypes from "prop-types";
 import { useFrame } from "@react-three/fiber";
 
-const nGridRows = 12, nGridCols = 100, cubeSideLength = 0.03, cubeSpacingScalar = 4.5;
+const cubeSideLength = 0.03, cubeSpacingScalar = 4.5;
 
 function getValueForNormalizedCoord(data, normalizedCoordinate) {
   if (!data) return 0;
@@ -17,25 +17,24 @@ function getValueForNormalizedCoord(data, normalizedCoordinate) {
   return valueBelow + (rawIndex % 1) * (valueAbove - valueBelow);
 }
 
-function DataReactiveGrid({ audioRef }) {
+function DataReactiveGrid({ audioRef, gridCols, gridRows }) {
   const mesh = useRef();
 
-  const [data, setData] = useState([]);
-
+  const data = useMemo(() => new Array(121), []);
   const matrix = useMemo(() => new Matrix4(), []);
   const lut = useMemo(() => new Lut("cooltowarm"), []);
 
   useEffect(() => {
-    if (!audioRef.current) return;
+    if (!audioRef.current || !data) return;
 
-    AnaylzerLivestream({ audioRef, setData });
+    AnaylzerLivestream({ audioRef, data });
 
     const normQuadrantHypotenuse = Math.hypot(0.5, 0.5);
 
-    for (let index = 0, row = 0; row < nGridRows; row++) {
-      for (let col = 0; col < nGridCols; col++) {
-        const normGridX = row / nGridRows;
-        const normGridY = col / nGridCols;
+    for (let index = 0, row = 0; row < gridCols; row++) {
+      for (let col = 0; col < gridRows; col++) {
+        const normGridX = row / gridCols;
+        const normGridY = col / gridRows;
         const normRadialOffset = Math.hypot(normGridX - 0.5, normGridY - 0.5) / normQuadrantHypotenuse;
 
         mesh.current.setColorAt(index++, lut.getColor(normRadialOffset));
@@ -43,17 +42,17 @@ function DataReactiveGrid({ audioRef }) {
     }
 
     mesh.current.instanceColor.needsUpdate = true;
-  }, [audioRef, lut]);
+  }, [audioRef, data, gridRows, gridCols, lut]);
 
   useFrame(() => {
-    const gridSizeX = nGridRows * cubeSpacingScalar * cubeSideLength;
-    const gridSizeY = nGridCols * cubeSpacingScalar * cubeSideLength;
+    const gridSizeX = gridRows * cubeSpacingScalar * cubeSideLength;
+    const gridSizeY = gridRows * cubeSpacingScalar * cubeSideLength;
     const normQuadrantHypotenuse = Math.hypot(0.5, 0.5);
 
-    for (let index = 0, row = 0; row < nGridRows; row++) {
-      for (let col = 0; col < nGridCols; col++) {
-        const normGridX = row / nGridRows;
-        const normGridY = col / nGridCols;
+    for (let index = 0, row = 0; row < gridRows; row++) {
+      for (let col = 0; col < gridCols; col++) {
+        const normGridX = row / gridRows;
+        const normGridY = col / gridCols;
         const normRadialOffset = Math.hypot(normGridX - 0.5, normGridY - 0.5) / normQuadrantHypotenuse;
 
         mesh.current.setMatrixAt(
@@ -75,7 +74,7 @@ function DataReactiveGrid({ audioRef }) {
       ref={mesh}
       castShadow={true}
       receiveShadow={true}
-      args={[null, null, nGridRows * nGridCols]}
+      args={[null, null, gridRows * gridCols]}
     >
       <boxGeometry args={[cubeSideLength, cubeSideLength, cubeSideLength]} />
       <meshBasicMaterial />
@@ -84,7 +83,9 @@ function DataReactiveGrid({ audioRef }) {
 }
 
 DataReactiveGrid.propTypes = {
-  audioRef: PropTypes.any.isRequired
+  audioRef: PropTypes.any.isRequired,
+  gridCols: PropTypes.number,
+  gridRows: PropTypes.number
 };
 
 export default DataReactiveGrid;

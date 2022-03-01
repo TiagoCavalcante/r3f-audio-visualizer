@@ -4,20 +4,30 @@ import { Canvas } from "@react-three/fiber";
 import DataReactiveGrid from "./dataReactiveGrid";
 import PropTypes from "prop-types";
 
-function Equalizer({ audioRef, cameraPosition }) {
+function Equalizer({
+  audioRef,
+  cameraFov = 45,
+  cameraPosition,
+  gridCols = 80,
+  gridRows = 12
+}) {
   return (
     <Suspense fallback={null}>
       <Canvas
         mode="concurrent"
         camera={{
-          fov: 45,
+          fov: cameraFov,
           position: cameraPosition,
           up: [0, 0, 1]
         }}
       >
         <color attach="background" args={["black"]} />
 
-        <DataReactiveGrid audioRef={audioRef} />
+        <DataReactiveGrid
+          audioRef={audioRef}
+          gridCols={gridCols}
+          gridRows={gridRows}
+        />
 
         <EffectComposer>
           <Bloom
@@ -34,7 +44,10 @@ function Equalizer({ audioRef, cameraPosition }) {
 
 Equalizer.propTypes = {
   audioRef: PropTypes.any.isRequired,
-  cameraPosition: PropTypes.array.isRequired
+  cameraFov: PropTypes.number,
+  cameraPosition: PropTypes.array.isRequired,
+  gridCols: PropTypes.number,
+  gridRows: PropTypes.number
 };
 
 export default Equalizer;
