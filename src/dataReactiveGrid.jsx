@@ -17,7 +17,7 @@ function getValueForNormalizedCoord(data, normalizedCoordinate) {
   return valueBelow + (rawIndex % 1) * (valueAbove - valueBelow);
 }
 
-function DataReactiveGrid({ audioRef, gridCols, gridRows }) {
+function DataReactiveGrid({ audioRef, gridCols, gridRows, setAnalyzer }) {
   const mesh = useRef();
 
   const data = useMemo(() => new Array(121), []);
@@ -27,7 +27,7 @@ function DataReactiveGrid({ audioRef, gridCols, gridRows }) {
   useEffect(() => {
     if (!audioRef.current || !data) return;
 
-    AnaylzerLivestream({ audioRef, data });
+    setAnalyzer(AnaylzerLivestream({ audioRef, data }))
 
     const normQuadrantHypotenuse = Math.hypot(0.5, 0.5);
 
@@ -42,7 +42,7 @@ function DataReactiveGrid({ audioRef, gridCols, gridRows }) {
     }
 
     mesh.current.instanceColor.needsUpdate = true;
-  }, [audioRef, data, gridRows, gridCols, lut]);
+  }, [audioRef, data, gridRows, gridCols, lut, setAnalyzer]);
 
   useFrame(() => {
     const gridSizeX = gridRows * cubeSpacingScalar * cubeSideLength;
@@ -84,8 +84,9 @@ function DataReactiveGrid({ audioRef, gridCols, gridRows }) {
 
 DataReactiveGrid.propTypes = {
   audioRef: PropTypes.any.isRequired,
-  gridCols: PropTypes.number,
-  gridRows: PropTypes.number
+  gridCols: PropTypes.number.isRequired,
+  gridRows: PropTypes.number.isRequired,
+  setAnalyzer: PropTypes.any.isRequired
 };
 
 export default DataReactiveGrid;

@@ -14,11 +14,11 @@ function AnaylzerLivestream(_ref) {
     audioRef,
     data
   } = _ref;
-  return new _audiomotionAnalyzer.default(null, {
+  return new _audiomotionAnalyzer.default(undefined, {
     source: audioRef.current,
     mode: 2,
     useCanvas: false,
-    volume: 1,
+    start: false,
     onCanvasDraw: instance => {
       instance.getBars().forEach((_ref2, index) => {
         let {

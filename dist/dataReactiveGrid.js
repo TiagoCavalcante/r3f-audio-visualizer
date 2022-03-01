@@ -43,7 +43,8 @@ function DataReactiveGrid(_ref) {
   let {
     audioRef,
     gridCols,
-    gridRows
+    gridRows,
+    setAnalyzer
   } = _ref;
   const mesh = (0, _react.useRef)();
   const data = (0, _react.useMemo)(() => new Array(121), []);
@@ -51,10 +52,10 @@ function DataReactiveGrid(_ref) {
   const lut = (0, _react.useMemo)(() => new _Lut.Lut("cooltowarm"), []);
   (0, _react.useEffect)(() => {
     if (!audioRef.current || !data) return;
-    (0, _analyzerLivestream.default)({
+    setAnalyzer((0, _analyzerLivestream.default)({
       audioRef,
       data
-    });
+    }));
     const normQuadrantHypotenuse = Math.hypot(0.5, 0.5);
 
     for (let index = 0, row = 0; row < gridCols; row++) {
@@ -67,7 +68,7 @@ function DataReactiveGrid(_ref) {
     }
 
     mesh.current.instanceColor.needsUpdate = true;
-  }, [audioRef, data, gridRows, gridCols, lut]);
+  }, [audioRef, data, gridRows, gridCols, lut, setAnalyzer]);
   (0, _fiber.useFrame)(() => {
     const gridSizeX = gridRows * cubeSpacingScalar * cubeSideLength;
     const gridSizeY = gridRows * cubeSpacingScalar * cubeSideLength;
@@ -96,8 +97,9 @@ function DataReactiveGrid(_ref) {
 
 DataReactiveGrid.propTypes = {
   audioRef: _propTypes.default.any.isRequired,
-  gridCols: _propTypes.default.number,
-  gridRows: _propTypes.default.number
+  gridCols: _propTypes.default.number.isRequired,
+  gridRows: _propTypes.default.number.isRequired,
+  setAnalyzer: _propTypes.default.any.isRequired
 };
 var _default = DataReactiveGrid;
 exports.default = _default;
