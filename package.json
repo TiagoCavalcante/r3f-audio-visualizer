@@ -1,30 +1,29 @@
 {
   "name": "r3f-audio-visualizer",
-  "homepage": "https://dcyoung.github.io/r3f-audio-visualizer/",
+  "homepage": "https://github.com/TiagoCavalcante/r3f-audio-visualizer",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@react-three/drei": "^8.3.1",
-    "@react-three/fiber": "^7.0.24",
+    "@react-three/drei": "^8.11.1",
+    "@react-three/fiber": "^7.0.26",
     "@react-three/postprocessing": "^2.1.2",
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@testing-library/user-event": "^13.5.0",
     "audiomotion-analyzer": "^3.6.0",
-    "leva": "^0.9.18",
+    "leva": "^0.9.23",
+    "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0",
-    "three": "0.135.0",
-    "web-vitals": "^2.1.2"
+    "react-scripts": "^5.0.0",
+    "three": "^0.138.2"
+  },
+  "devDependencies": {
+    "prettier": "^2.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && gh-pages -d build",
-    "format": "npx prettier --write src/ public/"
+    "lint": "npx prettier --write src/ public/"
   },
   "eslintConfig": {
     "extends": [
@@ -43,10 +42,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^3.2.3",
-    "prettier": "2.5.1",
-    "serve": "^13.0.2"
   }
 }
