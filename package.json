@@ -1,8 +1,8 @@
 {
   "name": "r3f-equalizer",
   "homepage": "https://github.com/TiagoCavalcante/r3f-equalizer",
-  "version": "0.1.1",
-  "main": "src/index.js",
+  "version": "0.1.3",
+  "main": "src/index.jsx",
   "dependencies": {
     "@react-three/drei": "^8.11.1",
     "@react-three/fiber": "^7.0.26",
