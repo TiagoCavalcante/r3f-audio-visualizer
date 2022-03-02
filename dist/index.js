@@ -40,7 +40,8 @@ function Equalizer(_ref) {
     cameraFov = 45,
     cameraPosition = [0, 5, 15],
     gridCols = 80,
-    gridRows = 12
+    gridRows = 12,
+    onCreatedCallback = () => {}
   } = _ref;
   return /*#__PURE__*/_react.default.createElement(_react.Suspense, {
     fallback: null
@@ -50,7 +51,8 @@ function Equalizer(_ref) {
       fov: cameraFov,
       position: cameraPosition,
       up: [0, 0, 1]
-    }
+    },
+    onCreated: onCreatedCallback
   }, backgroundColor !== "" ? /*#__PURE__*/_react.default.createElement("color", {
     attach: "background",
     args: [backgroundColor]
@@ -76,7 +78,8 @@ Equalizer.propTypes = {
   cameraFov: _propTypes.default.number,
   cameraPosition: _propTypes.default.array,
   gridCols: _propTypes.default.number,
-  gridRows: _propTypes.default.number
+  gridRows: _propTypes.default.number,
+  onCreatedCallback: _propTypes.default.func.isRequired
 };
 var _default = Equalizer;
 exports.default = _default;

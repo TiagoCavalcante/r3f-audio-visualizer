@@ -13,7 +13,8 @@ function Equalizer({
   cameraFov = 45,
   cameraPosition = [0, 5, 15],
   gridCols = 80,
-  gridRows = 12
+  gridRows = 12,
+  onCreatedCallback = () => {}
 }) {
   return (
     <Suspense fallback={null}>
@@ -24,6 +25,7 @@ function Equalizer({
           position: cameraPosition,
           up: [0, 0, 1]
         }}
+        onCreated={onCreatedCallback}
       >
         {
           backgroundColor !== ""
@@ -60,7 +62,8 @@ Equalizer.propTypes = {
   cameraFov: PropTypes.number,
   cameraPosition: PropTypes.array,
   gridCols: PropTypes.number,
-  gridRows: PropTypes.number
+  gridRows: PropTypes.number,
+  onCreatedCallback: PropTypes.func.isRequired
 };
 
 export default Equalizer;

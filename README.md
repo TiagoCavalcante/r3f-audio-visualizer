@@ -19,6 +19,7 @@ The `Equazlizer` component receives the following properties:
 - `cameraPosition` (type: `number[3]`) — the position of the camera in the 3d space (which the center is `[0, 0, 0]`). Default: `[0, 5, 15]`
 - `gridCols` (type: `number`) — the number of columns of the "dancing cubes" grid. Default: `80`
 - `gridRows` (type: `number`) — the number of rows of the "dancing cubes" grid. Default: `12`
+- `onCreatedCallback` (type: `function`) — function called after the canvas is created. Default: `() => {}`
 
 Consults the [documentation of audiomotion-analizer](https://github.com/hvianna/audioMotion-analyzer#constructor) for other methods, but the main methods of `AnaylzerLivestream` are the following:
 - `connectInput(HTMLAudioElement)` (type: `audioListener`) — starts "hearing" the audio element, returns an object used in disconnection
