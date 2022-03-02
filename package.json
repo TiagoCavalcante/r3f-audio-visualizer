@@ -1,7 +1,7 @@
 {
   "name": "r3f-equalizer",
   "homepage": "https://github.com/TiagoCavalcante/r3f-equalizer",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "scripts": {

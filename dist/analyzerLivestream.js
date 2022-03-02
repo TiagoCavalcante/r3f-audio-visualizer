@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.default = AnaylzerLivestream;
 
 var _audiomotionAnalyzer = _interopRequireDefault(require("audiomotion-analyzer"));
 
@@ -28,6 +28,3 @@ function AnaylzerLivestream() {
     }
   });
 }
-
-var _default = AnaylzerLivestream;
-exports.default = _default;

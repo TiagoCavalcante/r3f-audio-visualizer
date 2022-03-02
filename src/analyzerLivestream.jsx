@@ -1,7 +1,7 @@
 import AudioMotionAnalyzer from "audiomotion-analyzer";
 import useStore from './store';
 
-function AnaylzerLivestream() {
+export default function AnaylzerLivestream() {
   return new AudioMotionAnalyzer(undefined, {
     mode: 2,
     useCanvas: false,
@@ -13,5 +13,3 @@ function AnaylzerLivestream() {
     }
   });
 }
-
-export default AnaylzerLivestream;

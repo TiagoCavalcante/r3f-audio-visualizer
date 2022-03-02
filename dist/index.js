@@ -33,7 +33,6 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function Equalizer(_ref) {
   let {
-    audioRef,
     cameraFov = 45,
     cameraPosition,
     gridCols = 80,
@@ -52,7 +51,6 @@ function Equalizer(_ref) {
     attach: "background",
     args: ["black"]
   }), /*#__PURE__*/_react.default.createElement(_dataReactiveGrid.default, {
-    audioRef: audioRef,
     gridCols: gridCols,
     gridRows: gridRows
   }), /*#__PURE__*/_react.default.createElement(_postprocessing.EffectComposer, null, /*#__PURE__*/_react.default.createElement(_postprocessing.Bloom, {
@@ -64,7 +62,6 @@ function Equalizer(_ref) {
 }
 
 Equalizer.propTypes = {
-  audioRef: _propTypes.default.any.isRequired,
   cameraFov: _propTypes.default.number,
   cameraPosition: _propTypes.default.array.isRequired,
   gridCols: _propTypes.default.number,

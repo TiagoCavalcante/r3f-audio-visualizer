@@ -6,7 +6,6 @@ import DataReactiveGrid from "./dataReactiveGrid";
 import PropTypes from "prop-types";
 
 function Equalizer({
-  audioRef,
   cameraFov = 45,
   cameraPosition,
   gridCols = 80,
@@ -25,7 +24,6 @@ function Equalizer({
         <color attach="background" args={["black"]} />
 
         <DataReactiveGrid
-          audioRef={audioRef}
           gridCols={gridCols}
           gridRows={gridRows}
         />
@@ -44,7 +42,6 @@ function Equalizer({
 }
 
 Equalizer.propTypes = {
-  audioRef: PropTypes.any.isRequired,
   cameraFov: PropTypes.number,
   cameraPosition: PropTypes.array.isRequired,
   gridCols: PropTypes.number,
