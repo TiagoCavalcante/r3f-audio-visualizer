@@ -37,8 +37,7 @@ function Equalizer(_ref) {
     cameraFov = 45,
     cameraPosition,
     gridCols = 80,
-    gridRows = 12,
-    setAnalyzer
+    gridRows = 12
   } = _ref;
   return /*#__PURE__*/_react.default.createElement(_react.Suspense, {
     fallback: null
@@ -55,8 +54,7 @@ function Equalizer(_ref) {
   }), /*#__PURE__*/_react.default.createElement(_dataReactiveGrid.default, {
     audioRef: audioRef,
     gridCols: gridCols,
-    gridRows: gridRows,
-    setAnalyzer: setAnalyzer
+    gridRows: gridRows
   }), /*#__PURE__*/_react.default.createElement(_postprocessing.EffectComposer, null, /*#__PURE__*/_react.default.createElement(_postprocessing.Bloom, {
     kernelSize: 3,
     luminanceThreshold: 0,
@@ -70,8 +68,7 @@ Equalizer.propTypes = {
   cameraFov: _propTypes.default.number,
   cameraPosition: _propTypes.default.array.isRequired,
   gridCols: _propTypes.default.number,
-  gridRows: _propTypes.default.number,
-  setAnalyzer: _propTypes.default.any.isRequired
+  gridRows: _propTypes.default.number
 };
 var _default = Equalizer;
 exports.default = _default;

@@ -10,8 +10,7 @@ function Equalizer({
   cameraFov = 45,
   cameraPosition,
   gridCols = 80,
-  gridRows = 12,
-  setAnalyzer
+  gridRows = 12
 }) {
   return (
     <Suspense fallback={null}>
@@ -29,7 +28,6 @@ function Equalizer({
           audioRef={audioRef}
           gridCols={gridCols}
           gridRows={gridRows}
-          setAnalyzer={setAnalyzer}
         />
 
         <EffectComposer>
@@ -50,8 +48,7 @@ Equalizer.propTypes = {
   cameraFov: PropTypes.number,
   cameraPosition: PropTypes.array.isRequired,
   gridCols: PropTypes.number,
-  gridRows: PropTypes.number,
-  setAnalyzer: PropTypes.any.isRequired
+  gridRows: PropTypes.number
 };
 
 export default Equalizer;

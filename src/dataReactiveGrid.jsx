@@ -79,8 +79,7 @@ function DataReactiveGrid({ gridCols, gridRows }) {
 DataReactiveGrid.propTypes = {
   audioRef: PropTypes.any.isRequired,
   gridCols: PropTypes.number.isRequired,
-  gridRows: PropTypes.number.isRequired,
-  setAnalyzer: PropTypes.any.isRequired
+  gridRows: PropTypes.number.isRequired
 };
 
 export default DataReactiveGrid;
