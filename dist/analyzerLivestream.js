@@ -7,24 +7,23 @@ exports.default = void 0;
 
 var _audiomotionAnalyzer = _interopRequireDefault(require("audiomotion-analyzer"));
 
+var _store = _interopRequireDefault(require("./store"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function AnaylzerLivestream(_ref) {
-  let {
-    audioRef,
-    data
-  } = _ref;
+function AnaylzerLivestream() {
   return new _audiomotionAnalyzer.default(undefined, {
-    source: audioRef.current,
     mode: 2,
     useCanvas: false,
     start: false,
     onCanvasDraw: instance => {
-      instance.getBars().forEach((_ref2, index) => {
-        let {
-          value
-        } = _ref2;
-        return data[index] = value[0];
+      _store.default.setState({
+        data: instance.getBars().map(_ref => {
+          let {
+            value
+          } = _ref;
+          return value[0];
+        })
       });
     }
   });

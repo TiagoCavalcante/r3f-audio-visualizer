@@ -1,15 +1,15 @@
 import AudioMotionAnalyzer from "audiomotion-analyzer";
+import useStore from './store';
 
-function AnaylzerLivestream({ audioRef, data }) {
+function AnaylzerLivestream() {
   return new AudioMotionAnalyzer(undefined, {
-    source: audioRef.current,
     mode: 2,
     useCanvas: false,
     start: false,
     onCanvasDraw: (instance) => {
-      instance
-        .getBars()
-        .forEach(({ value }, index) => data[index] = value[0]);
+      useStore.setState({
+        data: instance.getBars().map(({ value }) => value[0])
+      });
     }
   });
 }

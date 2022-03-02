@@ -1,6 +1,7 @@
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
+import AnaylzerLivestream from './analyzerLivestream';
 import DataReactiveGrid from "./dataReactiveGrid";
 import PropTypes from "prop-types";
 
@@ -54,3 +55,5 @@ Equalizer.propTypes = {
 };
 
 export default Equalizer;
+
+export { AnaylzerLivestream };

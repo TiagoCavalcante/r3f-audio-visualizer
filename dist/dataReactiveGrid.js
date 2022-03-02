@@ -11,8 +11,6 @@ require("core-js/modules/es.math.hypot.js");
 
 var _react = _interopRequireWildcard(require("react"));
 
-var _analyzerLivestream = _interopRequireDefault(require("./analyzerLivestream"));
-
 var _Lut = require("three/examples/jsm/math/Lut.js");
 
 var _Matrix = require("three/src/math/Matrix4");
@@ -20,6 +18,8 @@ var _Matrix = require("three/src/math/Matrix4");
 var _propTypes = _interopRequireDefault(require("prop-types"));
 
 var _fiber = require("@react-three/fiber");
+
+var _store = _interopRequireDefault(require("./store"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31,8 +31,7 @@ const cubeSideLength = 0.03,
       cubeSpacingScalar = 4.5;
 
 function getValueForNormalizedCoord(data, normalizedCoordinate) {
-  if (!data) return 0; // Interpolate from the bar values based on the normalized coordinate
-
+  // Interpolate from the bar values based on the normalized coordinate
   let rawIndex = normalizedCoordinate * (data.length - 1);
   let valueBelow = data[Math.floor(rawIndex)];
   let valueAbove = data[Math.ceil(rawIndex)];
@@ -41,21 +40,13 @@ function getValueForNormalizedCoord(data, normalizedCoordinate) {
 
 function DataReactiveGrid(_ref) {
   let {
-    audioRef,
     gridCols,
-    gridRows,
-    setAnalyzer
+    gridRows
   } = _ref;
   const mesh = (0, _react.useRef)();
-  const data = (0, _react.useMemo)(() => new Array(121), []);
   const matrix = (0, _react.useMemo)(() => new _Matrix.Matrix4(), []);
-  const lut = (0, _react.useMemo)(() => new _Lut.Lut("cooltowarm"), []);
   (0, _react.useEffect)(() => {
-    if (!audioRef.current || !data) return;
-    setAnalyzer((0, _analyzerLivestream.default)({
-      audioRef,
-      data
-    }));
+    const lut = new _Lut.Lut("cooltowarm");
     const normQuadrantHypotenuse = Math.hypot(0.5, 0.5);
 
     for (let index = 0, row = 0; row < gridCols; row++) {
@@ -68,8 +59,12 @@ function DataReactiveGrid(_ref) {
     }
 
     mesh.current.instanceColor.needsUpdate = true;
-  }, [audioRef, data, gridRows, gridCols, lut, setAnalyzer]);
+  }, [gridRows, gridCols]);
   (0, _fiber.useFrame)(() => {
+    const {
+      data
+    } = _store.default.getState();
+
     const gridSizeX = gridRows * cubeSpacingScalar * cubeSideLength;
     const gridSizeY = gridRows * cubeSpacingScalar * cubeSideLength;
     const normQuadrantHypotenuse = Math.hypot(0.5, 0.5);
