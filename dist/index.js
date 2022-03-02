@@ -33,8 +33,12 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 function Equalizer(_ref) {
   let {
+    amplitude = 1,
+    backgroundColor = "",
+    cubeSideLength = 0.03,
+    cubeSpacingScalar = 4.5,
     cameraFov = 45,
-    cameraPosition,
+    cameraPosition = [0, 5, 15],
     gridCols = 80,
     gridRows = 12
   } = _ref;
@@ -47,10 +51,13 @@ function Equalizer(_ref) {
       position: cameraPosition,
       up: [0, 0, 1]
     }
-  }, /*#__PURE__*/_react.default.createElement("color", {
+  }, backgroundColor !== "" ? /*#__PURE__*/_react.default.createElement("color", {
     attach: "background",
-    args: ["black"]
-  }), /*#__PURE__*/_react.default.createElement(_dataReactiveGrid.default, {
+    args: [backgroundColor]
+  }) : null, /*#__PURE__*/_react.default.createElement(_dataReactiveGrid.default, {
+    amplitude: amplitude,
+    cubeSideLength: cubeSideLength,
+    cubeSpacingScalar: cubeSpacingScalar,
     gridCols: gridCols,
     gridRows: gridRows
   }), /*#__PURE__*/_react.default.createElement(_postprocessing.EffectComposer, null, /*#__PURE__*/_react.default.createElement(_postprocessing.Bloom, {
@@ -62,8 +69,12 @@ function Equalizer(_ref) {
 }
 
 Equalizer.propTypes = {
+  amplitude: _propTypes.default.number,
+  backgroundColor: _propTypes.default.string,
+  cubeSideLength: _propTypes.default.number,
+  cubeSpacingScalar: _propTypes.default.number,
   cameraFov: _propTypes.default.number,
-  cameraPosition: _propTypes.default.array.isRequired,
+  cameraPosition: _propTypes.default.array,
   gridCols: _propTypes.default.number,
   gridRows: _propTypes.default.number
 };

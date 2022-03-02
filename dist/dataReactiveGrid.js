@@ -27,9 +27,6 @@ function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "functio
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-const cubeSideLength = 0.03,
-      cubeSpacingScalar = 4.5;
-
 function getValueForNormalizedCoord(data, normalizedCoordinate) {
   // Interpolate from the bar values based on the normalized coordinate
   let rawIndex = normalizedCoordinate * (data.length - 1);
@@ -40,6 +37,9 @@ function getValueForNormalizedCoord(data, normalizedCoordinate) {
 
 function DataReactiveGrid(_ref) {
   let {
+    amplitude,
+    cubeSideLength,
+    cubeSpacingScalar,
     gridCols,
     gridRows
   } = _ref;
@@ -74,7 +74,7 @@ function DataReactiveGrid(_ref) {
         const normGridX = row / gridRows;
         const normGridY = col / gridCols;
         const normRadialOffset = Math.hypot(normGridX - 0.5, normGridY - 0.5) / normQuadrantHypotenuse;
-        mesh.current.setMatrixAt(index++, matrix.setPosition(gridSizeX * (normGridX - 0.5), gridSizeY * (normGridY - 0.5), getValueForNormalizedCoord(data, normRadialOffset)));
+        mesh.current.setMatrixAt(index++, matrix.setPosition(gridSizeX * (normGridX - 0.5), gridSizeY * (normGridY - 0.5), amplitude * getValueForNormalizedCoord(data, normRadialOffset)));
       }
     }
 
@@ -91,6 +91,9 @@ function DataReactiveGrid(_ref) {
 }
 
 DataReactiveGrid.propTypes = {
+  amplitude: _propTypes.default.number.isRequired,
+  cubeSideLength: _propTypes.default.number.isRequired,
+  cubeSpacingScalar: _propTypes.default.number.isRequired,
   gridCols: _propTypes.default.number.isRequired,
   gridRows: _propTypes.default.number.isRequired
 };

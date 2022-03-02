@@ -6,8 +6,12 @@ import DataReactiveGrid from "./dataReactiveGrid";
 import PropTypes from "prop-types";
 
 function Equalizer({
+  amplitude = 1,
+  backgroundColor = "",
+  cubeSideLength = 0.03,
+  cubeSpacingScalar = 4.5,
   cameraFov = 45,
-  cameraPosition,
+  cameraPosition = [0, 5, 15],
   gridCols = 80,
   gridRows = 12
 }) {
@@ -21,9 +25,16 @@ function Equalizer({
           up: [0, 0, 1]
         }}
       >
-        <color attach="background" args={["black"]} />
+        {
+          backgroundColor !== ""
+            ? <color attach="background" args={[backgroundColor]} />
+            : null
+        }
 
         <DataReactiveGrid
+          amplitude={amplitude}
+          cubeSideLength={cubeSideLength}
+          cubeSpacingScalar={cubeSpacingScalar}
           gridCols={gridCols}
           gridRows={gridRows}
         />
@@ -42,8 +53,12 @@ function Equalizer({
 }
 
 Equalizer.propTypes = {
+  amplitude: PropTypes.number,
+  backgroundColor: PropTypes.string,
+  cubeSideLength: PropTypes.number,
+  cubeSpacingScalar: PropTypes.number,
   cameraFov: PropTypes.number,
-  cameraPosition: PropTypes.array.isRequired,
+  cameraPosition: PropTypes.array,
   gridCols: PropTypes.number,
   gridRows: PropTypes.number
 };

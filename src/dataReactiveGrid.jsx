@@ -5,8 +5,6 @@ import PropTypes from "prop-types";
 import { useFrame } from "@react-three/fiber";
 import useStore from './store';
 
-const cubeSideLength = 0.03, cubeSpacingScalar = 4.5;
-
 function getValueForNormalizedCoord(data, normalizedCoordinate) {
   // Interpolate from the bar values based on the normalized coordinate
   let rawIndex = normalizedCoordinate * (data.length - 1);
@@ -15,7 +13,13 @@ function getValueForNormalizedCoord(data, normalizedCoordinate) {
   return valueBelow + (rawIndex % 1) * (valueAbove - valueBelow);
 }
 
-function DataReactiveGrid({ gridCols, gridRows }) {
+function DataReactiveGrid({
+  amplitude,
+  cubeSideLength,
+  cubeSpacingScalar,
+  gridCols,
+  gridRows
+}) {
   const mesh = useRef();
 
   const matrix = useMemo(() => new Matrix4(), []);
@@ -54,7 +58,7 @@ function DataReactiveGrid({ gridCols, gridRows }) {
           matrix.setPosition(
             gridSizeX * (normGridX - 0.5),
             gridSizeY * (normGridY - 0.5),
-            getValueForNormalizedCoord(data, normRadialOffset)
+            amplitude * getValueForNormalizedCoord(data, normRadialOffset)
           )
         );
       }
@@ -77,6 +81,9 @@ function DataReactiveGrid({ gridCols, gridRows }) {
 }
 
 DataReactiveGrid.propTypes = {
+  amplitude: PropTypes.number.isRequired,
+  cubeSideLength: PropTypes.number.isRequired,
+  cubeSpacingScalar: PropTypes.number.isRequired,
   gridCols: PropTypes.number.isRequired,
   gridRows: PropTypes.number.isRequired
 };
