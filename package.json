@@ -2,6 +2,7 @@
   "name": "r3f-equalizer",
   "homepage": "https://github.com/TiagoCavalcante/r3f-equalizer",
   "version": "1.0.0",
+  "license": "MIT",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "scripts": {
