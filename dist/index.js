@@ -41,10 +41,11 @@ function Equalizer(_ref) {
     cameraPosition = [0, 5, 15],
     gridCols = 80,
     gridRows = 12,
+    loadingFallback = null,
     onCreatedCallback = () => {}
   } = _ref;
   return /*#__PURE__*/_react.default.createElement(_react.Suspense, {
-    fallback: null
+    fallback: loadingFallback
   }, /*#__PURE__*/_react.default.createElement(_fiber.Canvas, {
     mode: "concurrent",
     camera: {
@@ -79,6 +80,7 @@ Equalizer.propTypes = {
   cameraPosition: _propTypes.default.array,
   gridCols: _propTypes.default.number,
   gridRows: _propTypes.default.number,
+  loadingFallback: _propTypes.default.element,
   onCreatedCallback: _propTypes.default.func.isRequired
 };
 var _default = Equalizer;

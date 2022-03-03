@@ -14,10 +14,11 @@ function Equalizer({
   cameraPosition = [0, 5, 15],
   gridCols = 80,
   gridRows = 12,
+  loadingFallback = null,
   onCreatedCallback = () => {}
 }) {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={loadingFallback}>
       <Canvas
         mode="concurrent"
         camera={{
@@ -63,6 +64,7 @@ Equalizer.propTypes = {
   cameraPosition: PropTypes.array,
   gridCols: PropTypes.number,
   gridRows: PropTypes.number,
+  loadingFallback: PropTypes.element,
   onCreatedCallback: PropTypes.func.isRequired
 };
 
