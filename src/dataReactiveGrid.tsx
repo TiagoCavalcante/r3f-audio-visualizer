@@ -1,11 +1,14 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import { Lut } from "three/examples/jsm/math/Lut.js";
-import { Matrix4 } from "three/src/math/Matrix4";
-import PropTypes from "prop-types";
+import PropTypes, { InferProps } from "prop-types";
 import { useFrame } from "@react-three/fiber";
 import useStore from './store';
+import { InstancedMesh, Matrix4 } from 'three';
 
-function getValueForNormalizedCoord(data, normalizedCoordinate) {
+function getValueForNormalizedCoord(
+	data: number[], 
+	normalizedCoordinate: number
+) {
   // Interpolate from the bar values based on the normalized coordinate
   let rawIndex = normalizedCoordinate * (data.length - 1);
   let valueBelow = data[Math.floor(rawIndex)];
@@ -19,8 +22,8 @@ function DataReactiveGrid({
   cubeSpacingScalar,
   gridCols,
   gridRows
-}) {
-  const mesh = useRef();
+}: InferProps<typeof DataReactiveGrid.propTypes>) {
+  const mesh = useRef<InstancedMesh>();
 
   const matrix = useMemo(() => new Matrix4(), []);
 

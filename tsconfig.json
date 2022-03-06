@@ -5,14 +5,14 @@
     "esModuleInterop": true,
     "moduleResolution": "Node",
     "noImplicitAny": true,
-    "jsx": "react",
-    // "resolveJsonModule": true,
-    // "sourceMap": true
+    "outDir": "dist",
+    "jsx": "react"
   },
   "include": [
     "src/**/*"
   ],
   "exclude": [
+    "dist",
     "node_modules"
   ]
 }

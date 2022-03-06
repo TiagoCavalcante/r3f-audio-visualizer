@@ -14,7 +14,7 @@ function Equalizer({
   cameraPosition = [0, 5, 15],
   gridCols = 80,
   gridRows = 12,
-  loadingFallback = null,
+  loadingFallback = <></>,
   onCreatedCallback = () => {}
 }) {
   return (
@@ -23,7 +23,7 @@ function Equalizer({
         mode="concurrent"
         camera={{
           fov: cameraFov,
-          position: cameraPosition,
+          position: cameraPosition as [number, number, number],
           up: [0, 0, 1]
         }}
         onCreated={onCreatedCallback}
