@@ -1,10 +1,11 @@
 {
   "name": "r3f-equalizer",
   "homepage": "https://github.com/TiagoCavalcante/r3f-equalizer",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "license": "MIT",
-  "main": "lib/cjs/index.js",
-  "module": "lib/esm/index.js",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.esm.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "build": "rollup -c",
     "eject": "react-scripts eject",
@@ -17,11 +18,11 @@
     "react-scripts": "^5.0.0"
   },
   "peerDependencies": {
-    "react": "17.x",
     "@react-three/drei": ">=8.11.0",
     "@react-three/fiber": ">=7.0.0",
     "@react-three/postprocessing": ">=2.1.0",
     "prop-types": ">=15.8.0",
+    "react": "17.x",
     "three": ">=0.138.0",
     "zustand": ">=3.7.0"
   },
@@ -32,6 +33,8 @@
     "@types/three": "^0.138.0",
     "prettier": "^2.5.1",
     "rollup": "^2.69.2",
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-dts": "^4.2.0",
     "rollup-plugin-typescript2": "^0.31.2",
     "typescript": "^4.6.2"
   },
@@ -39,18 +42,6 @@
     "extends": [
       "react-app",
       "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
     ]
   }
 }

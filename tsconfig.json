@@ -2,10 +2,10 @@
   "compilerOptions": {
     "module": "ESNext",
     "allowJs": false,
+    "declaration": true,
     "esModuleInterop": true,
     "moduleResolution": "Node",
     "noImplicitAny": true,
-    "outDir": "dist",
     "jsx": "react"
   },
   "include": [
