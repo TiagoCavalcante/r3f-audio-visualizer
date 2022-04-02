@@ -33,9 +33,7 @@ const config = [
 			dts(),
 			del({
 				targets: [
-					'./lib/analyzerLivestream.d.ts',
-					'./lib/dataReactiveGrid.d.ts',
-					'./lib/store.d.ts'
+					'./lib/dataReactiveGrid.d.ts'
 				],
 				hook: 'buildEnd'
 			})

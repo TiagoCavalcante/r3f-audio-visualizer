@@ -1,13 +1,13 @@
-import React, { useEffect, useMemo, useRef } from "react";
-import { Lut } from "three/examples/jsm/math/Lut.js";
-import PropTypes, { InferProps } from "prop-types";
 import { useFrame } from "@react-three/fiber";
-import useStore from './store';
+import AudioMotionAnalyzer from 'audiomotion-analyzer';
+import PropTypes from "prop-types";
+import React, { RefObject, useEffect, useMemo, useRef } from "react";
 import { InstancedMesh, Matrix4 } from 'three';
+import { Lut } from "three/examples/jsm/math/Lut.js";
 
 function getValueForNormalizedCoord(
-	data: number[], 
-	normalizedCoordinate: number
+  data: number[],
+  normalizedCoordinate: number
 ) {
   // Interpolate from the bar values based on the normalized coordinate
   let rawIndex = normalizedCoordinate * (data.length - 1);
@@ -16,16 +16,51 @@ function getValueForNormalizedCoord(
   return valueBelow + (rawIndex % 1) * (valueAbove - valueBelow);
 }
 
+type DataGridProps = {
+  amplitude: number;
+  audio: RefObject<HTMLMediaElement>;
+  cubeSideLength: number;
+  cubeSpacing: number;
+  gridCols: number;
+  gridRows: number;
+};
+
 function DataReactiveGrid({
   amplitude,
+  audio,
   cubeSideLength,
-  cubeSpacingScalar,
+  cubeSpacing,
   gridCols,
   gridRows
-}: InferProps<typeof DataReactiveGrid.propTypes>) {
+}: DataGridProps) {
   const mesh = useRef<InstancedMesh>();
 
   const matrix = useMemo(() => new Matrix4(), []);
+  const data = useMemo(() => new Array(121).fill(0), []);
+  const analyzer = useMemo(() => {
+    if (!data) return;
+
+    return new AudioMotionAnalyzer(undefined, {
+      mode: 2,
+      useCanvas: false,
+      start: true,
+      onCanvasDraw: (instance) => {
+        const bars = instance.getBars();
+
+        bars.forEach(({ value }, index) => {
+          data[index] = value[0];
+        });
+      }
+    });
+  }, [data]);
+
+  useEffect(() => {
+    if (!analyzer) return;
+    if (!audio.current) return;
+
+    analyzer.disconnectInput();
+    analyzer.connectInput(audio.current);
+  }, [analyzer, audio]);
 
   useEffect(() => {
     const lut = new Lut("cooltowarm");
@@ -45,9 +80,8 @@ function DataReactiveGrid({
   }, [gridRows, gridCols]);
 
   useFrame(() => {
-    const { data } = useStore.getState();
-    const gridSizeX = gridRows * cubeSpacingScalar * cubeSideLength;
-    const gridSizeY = gridRows * cubeSpacingScalar * cubeSideLength;
+    const gridSizeX = gridRows * cubeSpacing * cubeSideLength;
+    const gridSizeY = gridRows * cubeSpacing * cubeSideLength;
     const normQuadrantHypotenuse = Math.hypot(0.5, 0.5);
 
     for (let index = 0, row = 0; row < gridRows; row++) {
@@ -85,8 +119,9 @@ function DataReactiveGrid({
 
 DataReactiveGrid.propTypes = {
   amplitude: PropTypes.number.isRequired,
+  audio: PropTypes.object.isRequired,
   cubeSideLength: PropTypes.number.isRequired,
-  cubeSpacingScalar: PropTypes.number.isRequired,
+  cubeSpacing: PropTypes.number.isRequired,
   gridCols: PropTypes.number.isRequired,
   gridRows: PropTypes.number.isRequired
 };

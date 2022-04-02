@@ -1,27 +1,27 @@
-/// <reference types="react" />
-import AudioMotionAnalyzer from 'audiomotion-analyzer';
 import PropTypes from 'prop-types';
+import { RefObject } from 'react';
 
-declare function AnaylzerLivestream(): AudioMotionAnalyzer;
-
-declare function Equalizer({ amplitude, backgroundColor, cubeSideLength, cubeSpacingScalar, cameraFov, cameraPosition, gridCols, gridRows, loadingFallback, onCreatedCallback }: {
+declare type EqualizerProps = {
     amplitude?: number;
+    audio: RefObject<HTMLMediaElement>;
     backgroundColor?: string;
     cubeSideLength?: number;
-    cubeSpacingScalar?: number;
+    cubeSpacing?: number;
     cameraFov?: number;
-    cameraPosition?: number[];
-    gridCols?: number;
+    cameraPosition?: [number, number, number];
     gridRows?: number;
+    gridCols?: number;
     loadingFallback?: JSX.Element;
     onCreatedCallback?: () => void;
-}): JSX.Element;
+};
+declare function Equalizer({ amplitude, audio, backgroundColor, cubeSideLength, cubeSpacing, cameraFov, cameraPosition, gridCols, gridRows, loadingFallback, onCreatedCallback }: EqualizerProps): JSX.Element;
 declare namespace Equalizer {
     var propTypes: {
         amplitude: PropTypes.Requireable<number>;
+        audio: PropTypes.Validator<object>;
         backgroundColor: PropTypes.Requireable<string>;
         cubeSideLength: PropTypes.Requireable<number>;
-        cubeSpacingScalar: PropTypes.Requireable<number>;
+        cubeSpacing: PropTypes.Requireable<number>;
         cameraFov: PropTypes.Requireable<number>;
         cameraPosition: PropTypes.Requireable<any[]>;
         gridCols: PropTypes.Requireable<number>;
@@ -31,4 +31,4 @@ declare namespace Equalizer {
     };
 }
 
-export { AnaylzerLivestream, Equalizer as default };
+export { Equalizer as default };
