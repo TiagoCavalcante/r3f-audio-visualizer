@@ -27,7 +27,7 @@ declare namespace Equalizer {
         gridCols: PropTypes.Requireable<number>;
         gridRows: PropTypes.Requireable<number>;
         loadingFallback: PropTypes.Requireable<PropTypes.ReactElementLike>;
-        onCreatedCallback: PropTypes.Validator<(...args: any[]) => any>;
+        onCreatedCallback: PropTypes.Requireable<(...args: any[]) => any>;
     };
 }
 

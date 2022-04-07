@@ -80,7 +80,7 @@ Equalizer.propTypes = {
   gridCols: PropTypes.number,
   gridRows: PropTypes.number,
   loadingFallback: PropTypes.element,
-  onCreatedCallback: PropTypes.func.isRequired
+  onCreatedCallback: PropTypes.func
 };
 
 export default Equalizer;
