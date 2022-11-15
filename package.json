@@ -10,11 +10,8 @@
     "build": "rollup -c",
     "lint": "npx prettier --write"
   },
-  "dependencies": {
-    "audiomotion-analyzer": "^3.6.0",
-    "react-scripts": "^5.0.0"
-  },
   "peerDependencies": {
+    "audiomotion-analyzer": ">=3.6.0",
     "@react-three/fiber": ">=7.0.0",
     "@react-three/postprocessing": ">=2.0.0",
     "prop-types": ">=15.8.0",
