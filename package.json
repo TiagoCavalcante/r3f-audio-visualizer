@@ -1,7 +1,7 @@
 {
   "name": "r3f-equalizer",
   "homepage": "https://github.com/TiagoCavalcante/r3f-equalizer",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "license": "MIT",
   "main": "lib/index.cjs.js",
   "module": "lib/index.esm.js",
